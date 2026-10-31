@@ -20,19 +20,46 @@ jobs:
           distribution: temurin
           java-version: 21
 
+      - name: Prepare web files
+        run: |
+          mkdir -p www
+          if [ -f index.html ]; then cp index.html www/index.html; fi
+
       - name: Install dependencies
         run: npm install
 
       - name: Add Android platform
         run: npx cap add android
 
+      - name: Generate app icons
+        continue-on-error: true
+        run: npx --yes @capacitor/assets@3 generate --android
+
+      - name: Add folder backup plugin
+        continue-on-error: true
+        run: |
+          D=android/app/src/main/java/com/naeem/unideadlines
+          cp native/SafBackupPlugin.java native/MainActivity.java "$D/"
+
       - name: Sync web files
         run: npx cap sync android
 
       - name: Build debug APK
+        id: build
+        continue-on-error: true
         working-directory: android
         run: |
           chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Retry without folder plugin
+        if: steps.build.outcome == 'failure'
+        working-directory: android
+        run: |
+          echo "::warning::Folder backup plugin failed to build. Building the APK without it."
+          D=app/src/main/java/com/naeem/unideadlines
+          rm -f "$D/SafBackupPlugin.java"
+          printf 'package com.naeem.unideadlines;\n\nimport com.getcapacitor.BridgeActivity;\n\npublic class MainActivity extends BridgeActivity {}\n' > "$D/MainActivity.java"
           ./gradlew assembleDebug
 
       - name: Upload APK
