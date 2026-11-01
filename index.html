@@ -100,7 +100,7 @@ details p{font-size:.8rem;color:var(--muted);margin:8px 0 0}
 .task.urgent{border-color:var(--bad);animation:blink 1s ease-in-out infinite}
 header{position:relative}
 .hd{text-align:center;padding:2px 28px 0}
-.logo{width:58px;height:58px;margin:0 auto 8px;border-radius:16px;overflow:hidden;box-shadow:0 6px 16px -6px rgba(0,0,0,.4)}.logo img{width:100%;height:100%;display:block}
+.logo{width:52px;height:52px;margin:0 auto 8px;border-radius:50%;background:rgba(255,255,255,.22);display:grid;place-items:center;font-size:1.7rem;box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
 .ttl{margin:0;font-size:1.6rem;font-weight:800;line-height:1.15;letter-spacing:.2px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.18)}
 .ttl em{font-style:normal;display:block;font-size:.78rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;opacity:.92;margin-bottom:3px}
 .ul{width:46px;height:4px;border-radius:4px;background:#fff;opacity:.7;margin:9px auto 7px}
@@ -119,12 +119,6 @@ header{position:relative}
 .mbtns button{flex:1;padding:12px;border-radius:12px;font-weight:700}
 .mbtns .pri{background:var(--accent);color:#fff}
 .mbtns .sec{background:var(--bg);border:1px solid var(--line)}
-.dl{font-size:.8rem;font-weight:700;color:var(--muted);margin-top:12px}
-.sched{font-size:.8rem;margin-top:4px;line-height:1.35}
-.sched b{font-weight:700}
-.badge+.badge{margin-left:5px}
-.badge.wait{background:color-mix(in srgb,#3b82f6 22%,transparent);color:#3b82f6}
-.badge.open{background:color-mix(in srgb,#12b5a3 22%,transparent);color:#12b5a3}
 </style>
 </head>
 <body>
@@ -133,14 +127,14 @@ header{position:relative}
   <div class="hd">
     <button class="dots" id="dots" aria-label="Menu">⋮</button>
     <div class="menu" id="menu">
-      <button class="mi" id="shotbtn"><span>📸</span>Add fees from screenshot</button>
       <button class="mi" id="manbtn"><span>✍️</span>Add fees manually</button>
+      <button class="mi" id="ntog"></button>
+      <button class="mi" id="ntbtn"><span>🧪</span>Send test reminder</button>
       <button class="mi" id="bkbtn"><span>💾</span>Backup now</button>
-      <button class="mi" id="foldbtn"><span>📁</span>Choose backup folder</button>
       <button class="mi" id="rsbtn"><span>📂</span>Restore from file</button>
       <button class="mi" id="theme"><span>🌓</span>Light / Dark</button>
     </div>
-    <div class="logo"><img alt="" src="data:image/png;base64,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"></div>
+    <div class="logo">🎓</div>
     <h1 class="ttl"><em>Naeem’s</em>Uni Deadlines</h1>
     <div class="ul"></div>
     <div class="sub"><span id="hi"></span> · <span id="date"></span></div>
@@ -164,10 +158,6 @@ header{position:relative}
     <button class="star" id="star" aria-label="Mark important">⭐</button>
   </div>
   <input id="amount" type="number" inputmode="numeric" placeholder="Amount in Rs (e.g. 2650)" style="display:none">
-  <div id="startbox"><div class="dl">🟢 Starts (opens)</div>
-  <div class="qd" id="qs"><button class="qb" data-s0="0">Now</button><button class="qb" data-s0="1">Tomorrow 9 AM</button></div>
-  <input id="start" type="datetime-local"></div>
-  <div class="dl" id="duelab">🔴 Ends (deadline)</div>
   <div class="qd" id="qd">
     <button class="qb" data-d="0">Today</button><button class="qb" data-d="1">Tomorrow</button><button class="qb" data-d="3">In 3 days</button><button class="qb" data-d="7">Next week</button>
   </div>
@@ -183,10 +173,8 @@ header{position:relative}
 <input id="search" placeholder="🔍 Search tasks or courses" style="margin-top:6px"><div id="sumbox"></div><div id="list"></div>
 
 <details id="bkp"><summary>💾 Backup &amp; restore</summary>
-  <p>Backup saves a dated .json file inside a folder named UniDeadlines, in the folder you choose. Once a folder is chosen, the app also saves a safety copy by itself once a day. Restore lets you pick any of those files again.</p>
-  <p id="bkfolder"></p>
+  <p>Backup saves a dated .json file to your phone (in Documents/UniTracker, or through the share sheet). Restore lets you pick that file again whenever you need it. The 💾 and 📂 buttons at the top do the same.</p>
   <div class="row"><button class="mini" id="bkbtn2">⬇️ Backup now</button><button class="mini" id="rsbtn2">⬆️ Restore from file</button></div>
-  <div class="row"><button class="mini" id="fldbtn2">📁 Choose backup folder</button></div>
   <details style="margin-top:12px"><summary>More options</summary>
     <textarea id="bk" spellcheck="false"></textarea>
     <div class="row"><button class="mini" id="copy">Copy</button><button class="mini" id="restore">Restore from text</button></div>
@@ -203,14 +191,14 @@ header{position:relative}
 
 <script>
 var TY={a:{n:"Assignment",i:"📝",c:"var(--a)"},q:{n:"Quiz",i:"⏱️",c:"var(--q)"},g:{n:"GDB",i:"💬",c:"var(--g)"},f:{n:"Fee",i:"💰",c:"#2fb344"},c:{n:"Custom",i:"✏️",c:"var(--o)"}};
-var TREE="uni-bk-tree",TREEN="uni-bk-name",AUTOK="uni-bk-auto",APPDIR="UniDeadlines",KEY="uni-tracker-v1",tasks=[],filter="all",selType="a",star=false,showDone=false,nextDue=null,nextStart=false,undoFn=null,tt;
+var KEY="uni-tracker-v1",tasks=[],filter="all",selType="a",star=false,showDone=false,nextDue=null,undoFn=null,tt;
 var Q=["Small steps every day beat last-minute panic.","Future you says thanks for starting today.","Done is better than perfect.","One task at a time. You have got this.","Deadlines are just plans with a date."];
 function $(i){return document.getElementById(i)}
 function load(){try{var r=localStorage.getItem(KEY);tasks=r?JSON.parse(r):[];tasks.forEach(function(t){if(t.type==="o"){t.type="c";t.label=t.label||"Other"}})}catch(e){tasks=[]}}
 var BK="uni-backups-v1";
 function bkAll(){try{return JSON.parse(localStorage.getItem(BK))||{}}catch(e){return{}}}
 function snap(){try{var b=bkAll(),d=toLocal(new Date()).slice(0,10);b[d]=tasks;Object.keys(b).filter(function(k){return k!=="before-restore"}).sort().reverse().slice(30).forEach(function(k){delete b[k]});localStorage.setItem(BK,JSON.stringify(b))}catch(e){}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(tasks))}catch(e){}snap();autoBackup()}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(tasks))}catch(e){}snap();schedNotify()}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function p2(n){return n<10?"0"+n:""+n}
 function toLocal(d){return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())+"T"+p2(d.getHours())+":"+p2(d.getMinutes())}
@@ -227,9 +215,7 @@ function cd(ms,secs){
   var txt=d>0?d+"d "+h+"h "+m+"m":h>0?h+"h "+m+"m"+(secs?" "+s+"s":""):m+"m"+(secs?" "+s+"s":"");
   return ms<0?"Overdue by "+txt:txt+" left";
 }
-function fmt(s){var d=new Date(s),o={weekday:"short",day:"numeric",month:"short",hour:"numeric",minute:"2-digit"};if(d.getFullYear()!==new Date().getFullYear())o.year="numeric";return d.toLocaleString([],o)}
-function waiting(t){return!t.done&&!!t.start&&new Date(t.start).getTime()>Date.now()}
-function sched(t){var x="";if(t.start)x+='<div class="sched">🟢 Starts: <b>'+fmt(t.start)+"</b></div>";if(t.due)x+='<div class="sched">'+(t.type==="f"?"📅 Due":"🔴 Ends")+': <b>'+fmt(t.due)+"</b></div>";return x}
+function fmt(s){return new Date(s).toLocaleString([],{weekday:"short",day:"numeric",month:"short",hour:"numeric",minute:"2-digit"})}
 function streak(){
   var days={};tasks.forEach(function(t){if(t.doneAt)days[sod(t.doneAt)]=1});
   var d=sod(Date.now()),n=0;if(!days[d])d-=864e5;
@@ -251,16 +237,12 @@ function confetti(x,y){
 function typeTag(t){var T=TY[t.type]||TY.c;return T.i+" "+esc(t.type==="c"?(t.label||"Custom"):T.n)}
 function card(t){
   var T=TY[t.type]||TY.c,g=group(t),cls=g==="over"?"late":(g==="today"||g==="tom")?"soon":"";
-  var wt=waiting(t),badge="";
-  if(!t.done){
-    if(wt)badge='<span class="badge wait">⏳ Starts in '+cd(new Date(t.start)-Date.now(),false).replace(" left","")+"</span>";
-    else{if(t.start)badge='<span class="badge open">🟢 Open now</span>';if(t.due)badge+='<span class="badge '+cls+'">'+(g==="over"?"⚠️ ":g==="today"?"🔥 ":"")+cd(new Date(t.due)-Date.now(),false)+"</span>"}
-  }
-  return '<div class="task'+(t.done?" done":"")+(!t.done&&!wt&&t.due&&new Date(t.due)-Date.now()<864e5?" urgent":"")+'" style="--c:'+T.c+'"><button class="tick" data-id="'+t.id+'" data-act="tick">'+(t.done?"✓":"")+'</button><div class="body"><div class="t">'+(t.star?"⭐ ":"")+esc(t.title)+'</div><div class="tags"><span class="tag">'+typeTag(t)+'</span>'+(t.course?'<span class="tag course" style="--h:'+hue(t.course)+'">'+esc(t.course)+'</span>':"")+(t.amount?'<span class="tag" style="--c:#2fb344">💰 Rs '+Number(t.amount).toLocaleString()+"</span>":"")+"</div>"+sched(t)+(t.note?'<div class="note">'+esc(t.note)+"</div>":"")+badge+'</div><div class="acts"><button data-id="'+t.id+'" data-act="star" class="'+(t.star?"on":"")+'" aria-label="Important">'+(t.star?"⭐":"☆")+'</button>'+(t.done?"":'<button data-id="'+t.id+'" data-act="snooze" aria-label="Push one day">+1d</button>')+'<button data-id="'+t.id+'" data-act="del" aria-label="Delete">🗑️</button></div></div>';
+  var badge=(t.done||!t.due)?"":'<span class="badge '+cls+'">'+(g==="over"?"⚠️ ":g==="today"?"🔥 ":"")+cd(new Date(t.due)-Date.now(),false)+"</span>";
+  return '<div class="task'+(t.done?" done":"")+(!t.done&&t.due&&new Date(t.due)-Date.now()<864e5?" urgent":"")+'" style="--c:'+T.c+'"><button class="tick" data-id="'+t.id+'" data-act="tick">'+(t.done?"✓":"")+'</button><div class="body"><div class="t">'+(t.star?"⭐ ":"")+esc(t.title)+'</div><div class="tags"><span class="tag">'+typeTag(t)+'</span>'+(t.course?'<span class="tag course" style="--h:'+hue(t.course)+'">'+esc(t.course)+'</span>':"")+(t.amount?'<span class="tag" style="--c:#2fb344">💰 Rs '+Number(t.amount).toLocaleString()+"</span>":"")+(t.due?'<span class="when">'+fmt(t.due)+"</span>":"")+"</div>"+(t.note?'<div class="note">'+esc(t.note)+"</div>":"")+badge+'</div><div class="acts"><button data-id="'+t.id+'" data-act="star" class="'+(t.star?"on":"")+'" aria-label="Important">'+(t.star?"⭐":"☆")+'</button>'+(t.done?"":'<button data-id="'+t.id+'" data-act="snooze" aria-label="Push one day">+1d</button>')+'<button data-id="'+t.id+'" data-act="del" aria-label="Delete">🗑️</button></div></div>';
 }
 function inF(t,f){if(f==="all")return true;if(f==="done")return !!t.done;if(f==="today"){var g=group(t);return g==="over"||g==="today"||(!t.done&&!!t.due&&new Date(t.due)-Date.now()<864e5)}return t.type===f}
 function cnt(f){return tasks.filter(function(t){return inF(t,f)&&(f==="done"?t.done:!t.done)}).length}
-function sumFees(){var b=$("sumbox");if(filter!=="f"){b.innerHTML="";return}var fs=tasks.filter(function(t){return t.type==="f"}),tot=0,paid=0;fs.forEach(function(t){var a=+t.amount||0;tot+=a;if(t.done)paid+=a});b.innerHTML=(fs.length?'<div class="sum"><div><b>Rs '+(tot-paid).toLocaleString()+'</b><span>Remaining</span></div><div><b>Rs '+paid.toLocaleString()+'</b><span>Paid</span></div><div><b>Rs '+tot.toLocaleString()+'</b><span>Total</span></div></div>':"")+'<div class="row" style="margin-top:8px"><button class="mini" data-s="shot" style="padding:12px">📸 From screenshot</button><button class="mini" data-s="man" style="padding:12px">✍️ Add manually</button></div>'}
+function sumFees(){var b=$("sumbox");if(filter!=="f"){b.innerHTML="";return}var fs=tasks.filter(function(t){return t.type==="f"}),tot=0,paid=0;fs.forEach(function(t){var a=+t.amount||0;tot+=a;if(t.done)paid+=a});b.innerHTML=(fs.length?'<div class="sum"><div><b>Rs '+(tot-paid).toLocaleString()+'</b><span>Remaining</span></div><div><b>Rs '+paid.toLocaleString()+'</b><span>Paid</span></div><div><b>Rs '+tot.toLocaleString()+'</b><span>Total</span></div></div>':"")+'<button class="mini" data-s="man" style="width:100%;margin-top:8px;padding:12px">✍️ Add installments</button>'}
 function bkList(){var b=bkAll(),ks=Object.keys(b).sort().reverse();$("bklist").innerHTML=ks.map(function(k){var a=b[k],pd=a.filter(function(t){return!t.done}).length,lab=k==="before-restore"?"↩️ Before last restore":new Date(k+"T12:00").toLocaleDateString([],{weekday:"short",day:"numeric",month:"short",year:"numeric"});return'<div class="bl"><span><b>'+lab+"</b><br>"+a.length+" tasks · "+pd+' pending</span><button class="mini" style="flex:none;padding:7px 14px" data-bk="'+k+'">Restore</button></div>'}).join("")||"<p>No snapshots yet.</p>"}
 function render(){sumFees();
   var pend=tasks.filter(function(t){return!t.done}),done=tasks.length-pend.length;
@@ -268,14 +250,11 @@ function render(){sumFees();
   $("pct").textContent=p+"%";$("fg").style.strokeDashoffset=194.8*(1-p/100);
   var over=pend.filter(function(t){return group(t)==="over"}).length,tod=pend.filter(function(t){var g=group(t);return g==="today"||g==="over"}).length,st=streak(),fee=pend.reduce(function(s,t){return s+(t.type==="f"?(+t.amount||0):0)},0);
   $("pills").innerHTML='<span class="pill">📋 '+pend.length+' pending</span><span class="pill">'+(over?"⚠️ "+over+" overdue":"🔥 "+tod+" due today")+'</span><span class="pill">🏆 '+done+' done</span>'+(st?'<span class="pill">🔥 '+st+'-day streak</span>':"")+(fee?'<span class="pill">💰 Rs '+fee.toLocaleString()+' fees left</span>':"");
-  var dated=pend.filter(function(t){return t.due&&!waiting(t)}).sort(function(a,b){return new Date(a.due)-new Date(b.due)});
-  var upc=pend.filter(waiting).sort(function(a,b){return new Date(a.start)-new Date(b.start)})[0];
-  var nx=dated[0];nextStart=false;nextDue=nx?new Date(nx.due).getTime():null;
-  if(nx)$("next").innerHTML='<small>NEXT UP</small><div class="nt">'+(TY[nx.type]||TY.c).i+" "+esc(nx.title)+(nx.course?" · "+esc(nx.course):"")+'</div><div class="cd" id="cd"></div>';
-  else if(upc){nextStart=true;nextDue=new Date(upc.start).getTime();$("next").innerHTML='<small>OPENS NEXT</small><div class="nt">'+(TY[upc.type]||TY.c).i+" "+esc(upc.title)+(upc.course?" · "+esc(upc.course):"")+'</div><div class="cd" id="cd"></div>'}
-  else $("next").innerHTML='<small>NEXT UP</small><div class="nt">Nothing urgent. Enjoy the calm 🎉</div>';
+  var dated=pend.filter(function(t){return t.due}).sort(function(a,b){return new Date(a.due)-new Date(b.due)});
+  var nx=dated[0];nextDue=nx?new Date(nx.due).getTime():null;
+  $("next").innerHTML=nx?'<small>NEXT UP</small><div class="nt">'+(TY[nx.type]||TY.c).i+" "+esc(nx.title)+(nx.course?" · "+esc(nx.course):"")+'</div><div class="cd" id="cd"></div>':'<small>NEXT UP</small><div class="nt">Nothing urgent. Enjoy the calm 🎉</div>';
   tick();
-  var urg=pend.filter(function(t){return t.due&&!waiting(t)&&new Date(t.due)-Date.now()<864e5}).sort(function(a,b){return new Date(a.due)-new Date(b.due)});
+  var urg=pend.filter(function(t){return t.due&&new Date(t.due)-Date.now()<864e5}).sort(function(a,b){return new Date(a.due)-new Date(b.due)});
   $("alert").innerHTML=urg.length?'<div class="alert" id="alertbox"><small>⏰ DUE WITHIN 24 HOURS · '+urg.length+'</small>'+urg.slice(0,4).map(function(t){var ms=new Date(t.due).getTime();return'<div class="ai"><span>'+(TY[t.type]||TY.c).i+" "+esc(t.title)+'</span><span class="acd" data-t="'+ms+'">'+cd(ms-Date.now(),false)+"</span></div>"}).join("")+(urg.length>4?'<div class="ai"><span>+ '+(urg.length-4)+" more"+"</span><span></span></div>":"")+"</div>":"";
   $("next").style.display=urg.length?"none":"";
   var cs=[];tasks.forEach(function(t){if(t.course&&cs.indexOf(t.course)<0)cs.push(t.course)});
@@ -298,22 +277,19 @@ function render(){sumFees();
   $("list").innerHTML=html||'<div class="empty"><big>🎉</big>Nothing here yet. Add your first task above!</div>';
   if(document.activeElement!==$("bk"))$("bk").value=JSON.stringify(tasks);bkList();
 }
-function tick(){document.querySelectorAll(".acd").forEach(function(x){x.textContent=cd(+x.dataset.t-Date.now(),true)});var e=$("cd");if(e&&nextDue!==null)e.textContent=nextStart?"Starts in "+cd(nextDue-Date.now(),true).replace(" left",""):cd(nextDue-Date.now(),true)}
+function tick(){document.querySelectorAll(".acd").forEach(function(x){x.textContent=cd(+x.dataset.t-Date.now(),true)});var e=$("cd");if(e&&nextDue!==null)e.textContent=cd(nextDue-Date.now(),true)}
 function buildTypes(){
   $("types").innerHTML=Object.keys(TY).map(function(k){return'<button class="tp'+(selType===k?" on":"")+'" style="--c:'+TY[k].c+'" data-t="'+k+'">'+TY[k].i+" "+(k==="c"?"Write your own":TY[k].n)+"</button>"}).join("");
-  $("custom").style.display=selType==="c"?"block":"none";$("amount").style.display=selType==="f"?"block":"none";$("startbox").style.display=selType==="f"?"none":"";$("duelab").textContent=selType==="f"?"📅 Due date":"🔴 Ends (deadline)";
+  $("custom").style.display=selType==="c"?"block":"none";$("amount").style.display=selType==="f"?"block":"none";
 }
 $("types").onclick=function(e){var b=e.target.closest("button");if(!b)return;selType=b.dataset.t;buildTypes();if(selType==="c")$("custom").focus()};
 $("qd").onclick=function(e){var b=e.target.closest("button");if(!b)return;var d=new Date();d.setDate(d.getDate()+(+b.dataset.d));d.setHours(23,59,0,0);$("due").value=toLocal(d)};
-$("qs").onclick=function(e){var b=e.target.closest("button");if(!b)return;var d=new Date(),n=+b.dataset.s0;if(n>0){d.setDate(d.getDate()+n);d.setHours(9,0,0,0)}$("start").value=toLocal(d)};
 $("star").onclick=function(){star=!star;this.classList.toggle("on",star)};
 $("add").onclick=function(){
   var title=$("title").value.trim();
   if(!title){$("title").focus();return}
-  var stv=selType==="f"?"":$("start").value,duv=$("due").value;
-  if(stv&&duv&&stv>duv){toast("Start must be before the end date",null);return}
-  tasks.push({id:Date.now().toString(36),title:title,course:$("course").value.trim(),type:selType,label:selType==="c"?$("custom").value.trim():"",amount:selType==="f"?(+$("amount").value||0):0,start:stv,due:duv,note:$("note").value.trim(),star:star,done:false});
-  save();["title","start","due","note","amount"].forEach(function(i){$(i).value=""});star=false;$("star").classList.remove("on");
+  tasks.push({id:Date.now().toString(36),title:title,course:$("course").value.trim(),type:selType,label:selType==="c"?$("custom").value.trim():"",amount:selType==="f"?(+$("amount").value||0):0,due:$("due").value,note:$("note").value.trim(),star:star,done:false});
+  save();["title","due","note","amount"].forEach(function(i){$(i).value=""});star=false;$("star").classList.remove("on");
   render();filter="all";render();$("addpanel").style.display="none";toast("Saved ✨",null);
 };
 $("list").onclick=function(e){
@@ -334,7 +310,7 @@ function go(f){filter=f;render();$("filters").scrollIntoView({behavior:"smooth",
 $("pills").onclick=function(e){var s=e.target.closest(".pill");if(!s)return;var x=s.textContent;go(/fees/.test(x)?"f":/overdue|today/.test(x)?"today":/done/.test(x)?"done":"all")};
 $("fab").onclick=function(){var p=$("addpanel");p.style.display="block";p.scrollIntoView({behavior:"smooth",block:"center"});$("title").focus()};
 $("closeadd").onclick=function(){$("addpanel").style.display="none"};
-$("bklist").onclick=function(e){var b=e.target.closest("button");if(!b)return;var all=bkAll(),d=all[b.dataset.bk];if(!d)return;all["before-restore"]=tasks;try{localStorage.setItem(BK,JSON.stringify(all))}catch(x){}tasks=d.slice();try{localStorage.setItem(KEY,JSON.stringify(tasks))}catch(x){}render();toast("Restored. Your previous list is kept as Before last restore.",null)};
+$("bklist").onclick=function(e){var b=e.target.closest("button");if(!b)return;var all=bkAll(),d=all[b.dataset.bk];if(!d)return;all["before-restore"]=tasks;try{localStorage.setItem(BK,JSON.stringify(all))}catch(x){}tasks=d.slice();try{localStorage.setItem(KEY,JSON.stringify(tasks))}catch(x){}schedNotify();render();toast("Restored. Your previous list is kept as Before last restore.",null)};
 $("theme").onclick=function(){var r=document.documentElement,dark=r.dataset.theme==="dark"||(r.dataset.theme!=="light"&&matchMedia("(prefers-color-scheme:dark)").matches);r.dataset.theme=dark?"light":"dark"};
 $("copy").onclick=function(){
   var t=$("bk");t.select();
@@ -355,40 +331,26 @@ function seedFees(){
 }
 
 function stamp(){var d=new Date();return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())+"_"+p2(d.getHours())+"-"+p2(d.getMinutes())}
-function getSaf(){try{return(window.Capacitor&&Capacitor.Plugins&&Capacitor.Plugins.SafBackup)||null}catch(e){return null}}
-function folderShow(){var el=$("bkfolder");if(!el)return;el.textContent=localStorage.getItem(TREE)?"📁 Saving to: "+(localStorage.getItem(TREEN)||"chosen folder")+" / "+APPDIR:(getSaf()?"No folder chosen yet. Tap Backup now and you will be asked to pick one.":"")}
-function payloadJson(){return JSON.stringify({app:"uni-tracker",version:1,savedAt:new Date().toISOString(),tasks:tasks},null,2)}
-async function pickBackupFolder(){
-  var saf=getSaf();if(!saf){toast("The folder picker works only in the installed app",null);return null}
-  try{var r=await saf.pickFolder();localStorage.setItem(TREE,r.uri);localStorage.setItem(TREEN,r.name||"");folderShow();return r.uri}
-  catch(e){if(!/cancel/i.test(String(e&&e.message||e)))toast("Could not open the folder picker",null);return null}
-}
-async function chooseFolder(){var u=await pickBackupFolder();if(u)toast("Folder set ✅ Backups go to "+(localStorage.getItem(TREEN)||"")+" / "+APPDIR,null)}
-async function autoBackup(){
-  var saf=getSaf(),tree=localStorage.getItem(TREE);if(!saf||!tree)return;
-  var day=toLocal(new Date()).slice(0,10);if(localStorage.getItem(AUTOK)===day)return;
-  try{await saf.saveFile({treeUri:tree,folder:APPDIR,fileName:"UniTracker-Auto-"+day+".json",data:payloadJson()});localStorage.setItem(AUTOK,day)}catch(e){}
-}
 async function doBackup(){
-  var saf=getSaf(),payload=payloadJson();
-  if(saf){
-    var tree=localStorage.getItem(TREE)||await pickBackupFolder();if(!tree)return;
-    var name="UniTracker-Backup-"+stamp()+".json";
-    for(var tries=0;tries<2;tries++){
-      try{await saf.saveFile({treeUri:tree,folder:APPDIR,fileName:name,data:payload});toast("Backup saved ✅ "+(localStorage.getItem(TREEN)||"")+" / "+APPDIR+" / "+name,null);return}
-      catch(e){if(tries===0){tree=await pickBackupFolder();if(!tree)return}else toast("Could not save the backup. Try Choose backup folder again.",null)}
-    }
-    return;
-  }
+  var payload=JSON.stringify({app:"uni-tracker",version:1,savedAt:new Date().toISOString(),tasks:tasks},null,2),fname="UniTracker-Backup-"+stamp()+".json";
+  var FS=plug("Filesystem"),SH=plug("Share");
   try{
-    var dl=(typeof claude!=="undefined")?await claude.use("downloads"):null;
-    if(!dl){toast("Saving files is not available here. Use Copy under More options.",null);return}
-    await dl.save({filename:"UniTracker-Backup-"+stamp()+".json",data:payload});
-    toast("Backup saved ✅",null);
-  }catch(e){toast(e&&e.code==="declined"?"Backup cancelled":"Could not save the file. Use Copy under More options.",null)}
+    if(FS){
+      try{
+        await FS.writeFile({path:"UniTracker/"+fname,data:payload,directory:"DOCUMENTS",encoding:"utf8",recursive:true});
+        toast("Saved in Documents/UniTracker ✅",null);return;
+      }catch(e1){
+        if(!SH)throw e1;
+        var r=await FS.writeFile({path:fname,data:payload,directory:"CACHE",encoding:"utf8"});
+        await SH.share({title:fname,url:r.uri,dialogTitle:"Save your backup"});return;
+      }
+    }
+    var a=document.createElement("a");a.href=URL.createObjectURL(new Blob([payload],{type:"application/json"}));a.download=fname;document.body.appendChild(a);a.click();a.remove();
+    toast("Backup downloaded ✅",null);
+  }catch(e){toast("Could not save the backup. Use Copy under More options.",null)}
 }
 function pickRestore(){$("rfile").click()}
-$("bkbtn").onclick=doBackup;$("bkbtn2").onclick=doBackup;$("foldbtn").onclick=chooseFolder;$("fldbtn2").onclick=chooseFolder;
+$("bkbtn").onclick=doBackup;$("bkbtn2").onclick=doBackup;
 $("rsbtn").onclick=pickRestore;$("rsbtn2").onclick=pickRestore;
 $("rfile").onchange=function(){
   var f=this.files[0];this.value="";if(!f)return;
@@ -422,7 +384,7 @@ function shotPreview(){
     var dup=tasks.some(function(t){return t.type==="f"&&+t.amount===r.amount&&(t.due||"").slice(0,10)===r.due});
     return'<div class="mrow"><span><b>'+(r.no||i+1)+'.</b> Rs '+r.amount.toLocaleString()+' · '+fmtD(r.due)+(dup?' <i class="mut">(already added)</i>':'')+'</span><button data-rm="'+i+'" aria-label="Remove">✕</button></div>'}).join("")+'<div class="mbtns"><button class="sec" data-m="close">Cancel</button><button class="pri" data-m="add">Add all</button></div>');
 }
-$("shotbtn").onclick=pickShot;$("manbtn").onclick=function(){manualFees("")};
+$("manbtn").onclick=function(){manualFees("")};
 $("sumbox").onclick=function(e){var b=e.target.closest("button");if(!b)return;if(b.dataset.s==="man")manualFees("");else pickShot()};
 $("modal").onclick=function(e){
   var b=e.target.closest("button");
@@ -470,7 +432,53 @@ $("sfile").onchange=async function(){
     modal('<h3>Something went wrong</h3><div class="mut">'+m+'</div><div class="mbtns"><button class="sec" data-m="close">Close</button><button class="pri" data-m="manual">✍️ Enter manually</button></div>');
   }
 };
-load();seedFees();snap();buildTypes();render();folderShow();autoBackup();setInterval(tick,1000);setInterval(render,60000);
+function plug(n){var C=window.Capacitor;try{return C&&C.isNativePlatform&&C.isNativePlatform()?((C.Plugins&&C.Plugins[n])||C.registerPlugin(n)):null}catch(e){return null}}
+var LN=plug("LocalNotifications"),RKEY="uni-remind-v1",ntTimer;
+var OFFS=[[1440,"24 hours"],[720,"12 hours"],[360,"6 hours"],[180,"3 hours"],[60,"1 hour"],[15,"15 minutes"],[0,"now"]];
+function remindOn(){try{return localStorage.getItem(RKEY)!=="off"}catch(e){return true}}
+function hid(str){var h=7;for(var i=0;i<str.length;i++)h=(h*31+str.charCodeAt(i))%200000;return h}
+function ntLabel(){$("ntog").innerHTML="<span>🔔</span>Reminders: "+(remindOn()?"ON":"OFF")}
+async function initNotify(){
+  if(!LN)return;
+  try{
+    var st=await LN.checkPermissions();
+    if(st.display!=="granted")st=await LN.requestPermissions();
+    await LN.createChannel({id:"deadlines",name:"Deadline reminders",description:"Reminders before assignments, quizzes and fees are due",importance:5,visibility:1,vibration:true,lights:true,lightColor:"#FF3B30"});
+  }catch(e){}
+  schedNotify();
+}
+function schedNotify(){clearTimeout(ntTimer);ntTimer=setTimeout(doSched,700)}
+async function doSched(){
+  if(!LN)return;
+  try{
+    var pend=await LN.getPending();
+    if(pend.notifications&&pend.notifications.length)await LN.cancel({notifications:pend.notifications.map(function(n){return{id:n.id}})});
+    if(!remindOn())return;
+    var now=Date.now(),list=[];
+    tasks.forEach(function(t){
+      if(t.done||!t.due)return;
+      var due=new Date(t.due).getTime(),base=hid(String(t.id))*10,T=TY[t.type]||TY.c,amt=t.amount?" · Rs "+Number(t.amount).toLocaleString():"";
+      OFFS.forEach(function(o,i){
+        var at=due-o[0]*60000;
+        if(at<=now+5000||at>now+30*864e5)return;
+        list.push({id:base+i,title:o[0]===0?"🚨 Due now":"⏰ Due in "+o[1],body:T.i+" "+t.title+(t.course?" · "+t.course:"")+amt,schedule:{at:new Date(at),allowWhileIdle:true},channelId:"deadlines"});
+      });
+    });
+    list.sort(function(a,b){return a.schedule.at-b.schedule.at});
+    if(list.length)await LN.schedule({notifications:list.slice(0,200)});
+  }catch(e){}
+}
+$("ntog").onclick=function(){try{localStorage.setItem(RKEY,remindOn()?"off":"on")}catch(e){}ntLabel();schedNotify();toast("Reminders "+(remindOn()?"on":"off"),null)};
+$("ntbtn").onclick=async function(){
+  if(!LN){toast("Reminders work only in the installed app",null);return}
+  try{
+    var st=await LN.requestPermissions();
+    if(st.display!=="granted"){toast("Please allow notifications for this app in phone settings",null);return}
+    await LN.schedule({notifications:[{id:99999991,title:"⏰ Test reminder",body:"Reminders are working 🎉",schedule:{at:new Date(Date.now()+8000),allowWhileIdle:true},channelId:"deadlines"}]});
+    toast("Test reminder in 8 seconds. Close the app to see it pop up.",null);
+  }catch(e){toast("Could not schedule the reminder",null)}
+};
+load();seedFees();snap();buildTypes();render();ntLabel();initNotify();setInterval(tick,1000);setInterval(render,60000);
 </script>
 </body>
 </html>
